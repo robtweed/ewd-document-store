@@ -3,7 +3,7 @@
 var firstChild = require('../../../lib/proto/firstChild');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/firstChild:', function () {
+describe('unit/proto/firstChild:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

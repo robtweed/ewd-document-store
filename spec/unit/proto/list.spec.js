@@ -3,7 +3,7 @@
 var list = require('../../../lib/proto/list');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/list:', function () {
+describe('unit/proto/list:', function () {
   var DocumentStore;
   var documentStore;
   var db;

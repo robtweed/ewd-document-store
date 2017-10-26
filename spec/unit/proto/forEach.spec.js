@@ -4,7 +4,7 @@ var forEach = require('../../../lib/proto/forEach');
 var dbMock = require('../mocks/db');
 var FIELD_MARK = String.fromCharCode(254);
 
-describe(' - unit/proto/forEach:', function () {
+describe('unit/proto/forEach:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;
@@ -100,12 +100,22 @@ describe(' - unit/proto/forEach:', function () {
     }));
   });
 
-  it('should call callback exact times with correct arguments', function () {
+  it('should call callback exact times with correct arguments and context', function () {
     documentNode.forEachChild(callback);
 
     expect(callback).toHaveBeenCalledTimes(2);
-    expect(callback.calls.argsFor(0)).toEqual(['fooValue', jasmine.any(DocumentNode)]);
-    expect(callback.calls.argsFor(1)).toEqual(['barValue', jasmine.any(DocumentNode)]);
+    expect(callback.calls.all()[0]).toEqual(
+      jasmine.objectContaining({
+        object: documentNode,
+        args: ['fooValue', jasmine.any(DocumentNode)]
+      })
+    );
+    expect(callback.calls.all()[1]).toEqual(
+      jasmine.objectContaining({
+        object: documentNode,
+        args: ['barValue', jasmine.any(DocumentNode)]
+      })
+    );
   });
 
   it('should quit from loop', function () {

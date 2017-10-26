@@ -3,7 +3,7 @@
 var setDocument = require('../../../lib/proto/setDocument');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/setDocument:', function () {
+describe('unit/proto/setDocument:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;
@@ -45,7 +45,7 @@ describe(' - unit/proto/setDocument:', function () {
 
     documentNode.setDocument(obj);
 
-    expect(documentNode._set).toHaveBeenCalledWith('', {
+    expect(documentNode._set).toHaveBeenCalledWithContext(documentNode, '', {
       global: 'rob',
       subscripts: ['address', 'bar']
     });
@@ -58,7 +58,7 @@ describe(' - unit/proto/setDocument:', function () {
 
     documentNode.setDocument(obj);
 
-    expect(documentNode._set).toHaveBeenCalledWith('', {
+    expect(documentNode._set).toHaveBeenCalledWithContext(documentNode, '', {
       global: 'rob',
       subscripts: ['address', 'bar']
     });
@@ -71,7 +71,7 @@ describe(' - unit/proto/setDocument:', function () {
 
     documentNode.setDocument(obj);
 
-    expect(documentNode._set).toHaveBeenCalledWith('baz', {
+    expect(documentNode._set).toHaveBeenCalledWithContext(documentNode, 'baz', {
       global: 'rob',
       subscripts: ['address', 'bar']
     });
@@ -84,7 +84,7 @@ describe(' - unit/proto/setDocument:', function () {
 
     documentNode.setDocument(obj);
 
-    expect(documentNode._set).toHaveBeenCalledWith(10, {
+    expect(documentNode._set).toHaveBeenCalledWithContext(documentNode, 10, {
       global: 'rob',
       subscripts: ['address', 'bar']
     });
@@ -108,14 +108,30 @@ describe(' - unit/proto/setDocument:', function () {
     documentNode.setDocument(obj);
 
     expect(documentNode._set).toHaveBeenCalledTimes(2);
-    expect(documentNode._set.calls.argsFor(0)).toEqual(['a', {
-      global: 'rob',
-      subscripts: ['address', 'bar', 0]
-    }]);
-    expect(documentNode._set.calls.argsFor(1)).toEqual(['b', {
-      global: 'rob',
-      subscripts: ['address', 'bar', 1]
-    }]);
+    expect(documentNode._set.calls.all()[0]).toEqual(
+      jasmine.objectContaining({
+        object: documentNode,
+        args: [
+          'a',
+          {
+            global: 'rob',
+            subscripts: ['address', 'bar', 0]
+          }
+        ]
+      })
+    );
+    expect(documentNode._set.calls.all()[1]).toEqual(
+      jasmine.objectContaining({
+        object: documentNode,
+        args: [
+          'b',
+          {
+            global: 'rob',
+            subscripts: ['address', 'bar', 1]
+          }
+        ]
+      })
+    );
   });
 
   it('should process array with offset', function () {
@@ -127,14 +143,30 @@ describe(' - unit/proto/setDocument:', function () {
     documentNode.setDocument(obj, offset);
 
     expect(documentNode._set).toHaveBeenCalledTimes(2);
-    expect(documentNode._set.calls.argsFor(0)).toEqual(['a', {
-      global: 'rob',
-      subscripts: ['address', 'bar', 2]
-    }]);
-    expect(documentNode._set.calls.argsFor(1)).toEqual(['b', {
-      global: 'rob',
-      subscripts: ['address', 'bar', 3]
-    }]);
+    expect(documentNode._set.calls.all()[0]).toEqual(
+      jasmine.objectContaining({
+        object: documentNode,
+        args: [
+          'a',
+          {
+            global: 'rob',
+            subscripts: ['address', 'bar', 2]
+          }
+        ]
+      })
+    );
+    expect(documentNode._set.calls.all()[1]).toEqual(
+      jasmine.objectContaining({
+        object: documentNode,
+        args: [
+          'b',
+          {
+            global: 'rob',
+            subscripts: ['address', 'bar', 3]
+          }
+        ]
+      })
+    );
   });
 
   it('should process when array item is object', function () {
@@ -148,7 +180,7 @@ describe(' - unit/proto/setDocument:', function () {
 
     documentNode.setDocument(obj);
 
-    expect(documentNode._set).toHaveBeenCalledWith('baz', {
+    expect(documentNode._set).toHaveBeenCalledWithContext(documentNode, 'baz', {
       global: 'rob',
       subscripts: ['address', 'bar', 0, 'foo']
     });
@@ -163,7 +195,7 @@ describe(' - unit/proto/setDocument:', function () {
 
     documentNode.setDocument(obj);
 
-    expect(documentNode._set).toHaveBeenCalledWith('baz', {
+    expect(documentNode._set).toHaveBeenCalledWithContext(documentNode, 'baz', {
       global: 'rob',
       subscripts: ['address', 'bar', 'foo']
     });

@@ -3,7 +3,7 @@
 var parent = require('../../../lib/proto/parent');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/parent:', function () {
+describe('unit/proto/parent:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

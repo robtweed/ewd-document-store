@@ -5,7 +5,7 @@ require('dotenv').config();
 var DocumentStore = require('../../');
 var Cache = require('cache').Cache;
 
-describe(' - integration/ewd-document-store: ', function () {
+describe('integration/ewd-document-store: ', function () {
   var db;
   var documentStore;
 

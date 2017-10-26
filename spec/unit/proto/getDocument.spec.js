@@ -3,7 +3,7 @@
 var getDocument = require('../../../lib/proto/getDocument');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/setDocument:', function () {
+describe('unit/proto/setDocument:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

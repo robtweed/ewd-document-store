@@ -4,7 +4,7 @@ var events = require('events');
 var rewire = require('rewire');
 var DocumentStore = rewire('../../lib/documentStore');
 
-describe(' - unit/documentStore:', function () {
+describe('unit/documentStore:', function () {
   var revertBuild;
 
   beforeEach(function () {

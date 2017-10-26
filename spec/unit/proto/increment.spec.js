@@ -3,7 +3,7 @@
 var increment = require('../../../lib/proto/increment');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/increment:', function () {
+describe('unit/proto/increment:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

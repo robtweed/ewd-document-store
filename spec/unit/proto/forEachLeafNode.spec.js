@@ -3,7 +3,7 @@
 var forEachLeafNode = require('../../../lib/proto/forEachLeafNode');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/forEachLeafNode:', function () {
+describe('unit/proto/forEachLeafNode:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;
@@ -78,19 +78,21 @@ describe(' - unit/proto/forEachLeafNode:', function () {
     /*jshint camelcase: true */
   });
 
-  it('should call callback exact times with correct arguments', function () {
+  it('should call callback exact times with correct arguments and context', function () {
     documentNode.forEachLeafNode(callback);
 
     expect(callback).toHaveBeenCalledTimes(2);
 
-    expect(callback.calls.argsFor(0)).toEqual(['barValue', jasmine.any(DocumentNode)]);
-    expect(callback.calls.argsFor(0)[1]).toEqual(jasmine.objectContaining({
+    expect(callback.calls.thisArgFor(0)).toBe(documentNode);
+    expect(callback.calls.at(0).args).toEqual(['barValue', jasmine.any(DocumentNode)]);
+    expect(callback.calls.at(0).args[1]).toEqual(jasmine.objectContaining({
       documentName: 'rob',
       path: ['foo', 'bar']
     }));
 
-    expect(callback.calls.argsFor(1)).toEqual(['bazValue', jasmine.any(DocumentNode)]);
-    expect(callback.calls.argsFor(1)[1]).toEqual(jasmine.objectContaining({
+    expect(callback.calls.thisArgFor(1)).toBe(documentNode);
+    expect(callback.calls.at(1).args).toEqual(['bazValue', jasmine.any(DocumentNode)]);
+    expect(callback.calls.at(1).args[1]).toEqual(jasmine.objectContaining({
       documentName: 'rob',
       path: ['foo', 'baz']
     }));
@@ -102,7 +104,7 @@ describe(' - unit/proto/forEachLeafNode:', function () {
     documentNode.forEachLeafNode(callback);
 
     expect(callback).toHaveBeenCalledTimes(1);
-    expect(callback).toHaveBeenCalledWith('barValue', jasmine.any(DocumentNode));
+    expect(callback).toHaveBeenCalledWithContext(documentNode, 'barValue', jasmine.any(DocumentNode));
   });
 
   it('should process when not within root', function () {
@@ -142,6 +144,6 @@ describe(' - unit/proto/forEachLeafNode:', function () {
     documentNode.forEachLeafNode(callback);
 
     expect(callback).toHaveBeenCalledTimes(1);
-    expect(callback).toHaveBeenCalledWith('', jasmine.any(DocumentNode));
+    expect(callback).toHaveBeenCalledWithContext(documentNode, '', jasmine.any(DocumentNode));
   });
 });

@@ -3,7 +3,7 @@
 var previousSibling = require('../../../lib/proto/previousSibling');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/previousSibling:', function () {
+describe('unit/proto/previousSibling:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;
