@@ -55,6 +55,6 @@ describe('unit/proto/value:', function () {
 
     documentNode.value = 'bar';
 
-    expect(documentNode._set).toHaveBeenCalledWith('bar');
+    expect(documentNode._set).toHaveBeenCalledWithContext(documentNode, 'bar');
   });
 });
