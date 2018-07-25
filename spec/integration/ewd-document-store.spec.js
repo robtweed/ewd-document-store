@@ -2,23 +2,18 @@
 
 require('dotenv').config();
 
+var dbFactory = require('./dbFactory');
 var DocumentStore = require('../../');
-var Cache = require('cache').Cache;
 
-describe('integration/ewd-document-store: ', function () {
+describe('integration/ewd-document-store:', function () {
   var db;
   var documentStore;
 
   beforeAll(function () {
-    db = new Cache();
+    db = dbFactory();
     documentStore = new DocumentStore(db);
 
-    db.open({
-      path: process.env.CACHE_MGR_PATH || '/opt/cache/mgr',
-      username: process.env.CACHE_USERNAME || '_SYSTEM',
-      password: process.env.CACHE_PASSWORD || 'SYS',
-      namespace: process.env.CACHE_NAMESPACE || 'USER'
-    });
+    db.open();
   });
 
   afterAll(function () {
@@ -292,7 +287,7 @@ describe('integration/ewd-document-store: ', function () {
         expect(actual).toEqual(expected);
       });
 
-      it('should return from-to range (boundaries)', function () {
+      it('should return from-to range (boundaries, forwards)', function () {
         var expected = [
           ['Briggs', 'temp', 'foo', 'Briggs'],
           ['Davies', 'temp', 'foo', 'Davies'],
@@ -614,7 +609,6 @@ describe('integration/ewd-document-store: ', function () {
       });
 
       var actual = documentStore.list();
-
       expect(actual).toEqual(expected);
 
       ['foo', 'bar', 'baz'].forEach(function (name) {
