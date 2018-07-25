@@ -1,8 +1,8 @@
 {
   "name": "ewd-document-store",
-  "version": "1.19.1",
+  "version": "1.23.0",
   "config": {
-    "date": "5 October 2017"
+    "date": "9 May 2018"
   },
   "description": "Persistent JavaScript Objects and Document Database using Global Storage",
   "author": "Rob Tweed, M/Gateway Developments Ltd",
