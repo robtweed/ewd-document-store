@@ -29,6 +29,8 @@
     "test:integration:cache": "DATABASE=cache jasmine --config=spec/support/integration.json",
     "coverage:unit": "nyc --reporter=html --reporter=text jasmine --config=spec/support/unit.json",
     "coverage:integration": "nyc --reporter=html --reporter=text jasmine --config=spec/support/integration.json",
+    "coverage:integration:gtm": "DATABASE=gtm nyc --reporter=html --reporter=text jasmine --config=spec/support/integration.json",
+    "coverage:integration:cache": "DATABASE=cache nyc --reporter=html --reporter=text jasmine --config=spec/support/integration.json",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "validate": "npm ls"
   },
@@ -47,6 +49,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
+    "ewd-memory-globals": "^1.0.2",
     "dotenv": "^6.0.0",
     "jasmine": "^3.1.0",
     "jasmine-spec-reporter": "^4.1.1",
@@ -55,9 +58,5 @@
     "nyc": "^12.0.2",
     "pre-commit": "^1.2.2",
     "rewire": "^4.0.1"
-  },
-  "optionalDependencies": {
-    "ewd-memory-globals": "^1.0.2",
-    "nodem": "^0.9.2"
   }
 }

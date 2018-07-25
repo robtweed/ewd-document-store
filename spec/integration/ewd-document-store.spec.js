@@ -159,7 +159,7 @@ describe('integration/ewd-document-store:', function () {
 
       foo.increment();
 
-      expect(foo.value).toBe('1');
+      expect(foo.value).toBe(1);
     });
 
     it('#countChildren', function () {

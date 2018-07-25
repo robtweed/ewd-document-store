@@ -132,6 +132,8 @@ describe('unit/documentStore:', function () {
         'getDocument',
         'setDocument',
         'forEachLeafNode',
+        'lock',
+        'unlock',
         '_set'
       ].forEach(function (method) {
         describe('#' + method, function () {
