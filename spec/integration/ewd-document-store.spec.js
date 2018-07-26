@@ -479,7 +479,7 @@ describe('integration/ewd-document-store:', function () {
         expect(actual).toEqual(expected);
       });
 
-      it('should return document with arrays and offset', function () {
+      it('should return document with arrays and offset (array)', function () {
         var expected = {
           c: ['a', 's', 'd']
         };
@@ -489,6 +489,30 @@ describe('integration/ewd-document-store:', function () {
 
         var foo = {
           c: ['a', 's', 'd']
+        };
+
+        documentNode.$('foo').delete();
+        documentNode.$('foo').setDocument(foo, offset);
+
+        var actual = documentNode.$('foo').getDocument(useArrays, offset);
+
+        expect(actual).toEqual(expected);
+      });
+
+      it('should return document with arrays and offset (object with keys)', function () {
+        var expected = {
+          c: ['a', 's', 'd']
+        };
+
+        var useArrays = true;
+        var offset = 1;
+
+        var foo = {
+          c: {
+            '1': 'a',
+            '2': 's',
+            '3': 'd',
+          }
         };
 
         documentNode.$('foo').delete();
