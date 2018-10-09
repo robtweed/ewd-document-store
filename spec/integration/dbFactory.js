@@ -37,6 +37,18 @@ function initGtmDb() {
   return db;
 }
 
+function initRedisDb() {
+  /*jshint camelcase: false */
+  var Redis = require('ewd-redis-globals');
+  var db = new Redis({
+    key_separator: ':',
+    integer_padding: 10
+  });
+  /*jshint camelcase: true */
+
+  return db;
+}
+
 function initMemoryDb() {
   /*jshint camelcase: false */
   var Memory = require('ewd-memory-globals');
@@ -56,6 +68,9 @@ module.exports = function () {
 
     case 'gtm':
       return initGtmDb();
+
+    case 'redis':
+      return initRedisDb();
 
     case 'memory':
       return initMemoryDb();

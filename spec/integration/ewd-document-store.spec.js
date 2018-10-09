@@ -249,6 +249,27 @@ describe('integration/ewd-document-store:', function () {
         expect(actual).toEqual(expected);
       });
 
+      it('should return all children in reverse direction #2', function () {
+        var expected = [
+          ['d', 'temp', 'foo', 'd'],
+          ['c', 'temp', 'foo', 'c'],
+          ['b', 'temp', 'foo', 'b'],
+          ['a', 'temp', 'foo', 'a'],
+          ['Douglas', 'temp', 'foo', 'Douglas'],
+          ['Davis', 'temp', 'foo', 'Davis'],
+          ['Davies', 'temp', 'foo', 'Davies'],
+          ['Briggs', 'temp', 'foo', 'Briggs'],
+          ['Barton', 'temp', 'foo', 'Barton']
+        ];
+
+        var actual = [];
+        documentNode.$('foo').forEachChild('reverse', function (nodeName, node) {
+          actual.push([nodeName, node.documentName].concat(node.path));
+        });
+
+        expect(actual).toEqual(expected);
+      });
+
       it('should return children using prefix', function () {
         var expected = [
           ['Barton', 'temp', 'foo', 'Barton'],
@@ -307,7 +328,7 @@ describe('integration/ewd-document-store:', function () {
         expect(actual).toEqual(expected);
       });
 
-      it('should return from-* range', function () {
+      it('should return from-* range (forwards)', function () {
         var expected = [
           ['Davies', 'temp', 'foo', 'Davies'],
           ['Davis', 'temp', 'foo', 'Davis'],
@@ -330,6 +351,28 @@ describe('integration/ewd-document-store:', function () {
         expect(actual).toEqual(expected);
       });
 
+      it('should return from-* range (reverse)', function () {
+        var expected = [
+          ['Douglas', 'temp', 'foo', 'Douglas'],
+          ['Davis', 'temp', 'foo', 'Davis'],
+          ['Davies', 'temp', 'foo', 'Davies'],
+          ['Briggs', 'temp', 'foo', 'Briggs'],
+          ['Barton', 'temp', 'foo', 'Barton']
+        ];
+
+        var actual = [];
+        documentNode.$('foo').forEachChild({
+          direction: 'reverse',
+          range: {
+            from: 'D'
+          }
+        }, function (nodeName, node) {
+          actual.push([nodeName, node.documentName].concat(node.path));
+        });
+
+        expect(actual).toEqual(expected);
+      });
+
       it('should return *-to range', function () {
         var expected = [
           ['Barton', 'temp', 'foo', 'Barton'],
@@ -341,6 +384,30 @@ describe('integration/ewd-document-store:', function () {
 
         var actual = [];
         documentNode.$('foo').forEachChild({
+          range: {
+            to: 'D'
+          }
+        }, function (nodeName, node) {
+          actual.push([nodeName, node.documentName].concat(node.path));
+        });
+
+        expect(actual).toEqual(expected);
+      });
+
+      it('should return *-to range (reverse)', function () {
+        var expected = [
+          ['d', 'temp', 'foo', 'd'],
+          ['c', 'temp', 'foo', 'c'],
+          ['b', 'temp', 'foo', 'b'],
+          ['a', 'temp', 'foo', 'a'],
+          ['Douglas', 'temp', 'foo', 'Douglas'],
+          ['Davis', 'temp', 'foo', 'Davis'],
+          ['Davies', 'temp', 'foo', 'Davies']
+        ];
+
+        var actual = [];
+        documentNode.$('foo').forEachChild({
+          direction: 'reverse',
           range: {
             to: 'D'
           }
@@ -519,6 +586,23 @@ describe('integration/ewd-document-store:', function () {
         documentNode.$('foo').setDocument(foo, offset);
 
         var actual = documentNode.$('foo').getDocument(useArrays, offset);
+
+        expect(actual).toEqual(expected);
+      });
+
+      it('should return document with utf-8 characters', function () {
+        var expected = {
+          baz: 'Thắng Nguyễn'
+        };
+
+        var foo = {
+          baz: 'Thắng Nguyễn'
+        };
+
+        documentNode.$('foo').delete();
+        documentNode.$('foo').setDocument(foo);
+
+        var actual = documentNode.$('foo').getDocument();
 
         expect(actual).toEqual(expected);
       });
