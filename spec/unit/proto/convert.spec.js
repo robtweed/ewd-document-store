@@ -27,12 +27,6 @@ describe('unit/proto/convert:', function () {
     expect(actual).toBe(0.014);
   });
 
-  it('should return string started with 0', function () {
-    var actual = convert('0014');
-
-    expect(actual).toBe('0014');
-  });
-
   it('should return int number', function () {
     var actual = convert('136');
 
@@ -51,7 +45,8 @@ describe('unit/proto/convert:', function () {
     expect(actual).toBe('foo');
   });
 
-  xit('should return string', function () {
+  // https://github.com/robtweed/ewd-document-store/issues/23
+  it('should return string', function () {
     var actual = convert('0.foo');
 
     expect(actual).toBe('0.foo');
