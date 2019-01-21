@@ -30,6 +30,11 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
  * `npm run test:integration` (default)
  * `npm run test:integration:memory`
 
+### Redis
+
+ * `redis-server` (don't forget to start redis server)
+ * `npm run test:integration:redis`
+
 ### InterSystem Caché
 
   * You must have [InterSystem Caché](http://www.intersystems.com/our-products/cache/cache-overview/) installed
@@ -39,13 +44,15 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
   * Run `npm run test:integration:cache`
 
 ### Gtm or YottaDb
-
-  * Run `npm run test:integration:gtm`
+  * `cd ./docker/gtm`
+  * `docker build -t <name> .`
+  * `docker run -it --rm  -v ~/path/to/ewd-document-store:/opt/qewd/mapped <name> /bin/bash`
+  * `cd mapped && npm run test:integration:gtm`
 
 
 ## License
 
- Copyright (c) 2013-17 M/Gateway Developments Ltd,                           
+ Copyright (c) 2013-19 M/Gateway Developments Ltd,                           
  Reigate, Surrey UK.                                                      
  All rights reserved.                                                     
                                                                            
