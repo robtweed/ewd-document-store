@@ -590,22 +590,25 @@ describe('integration/ewd-document-store:', function () {
         expect(actual).toEqual(expected);
       });
 
-      xit('should return document with utf-8 characters', function () {
-        var expected = {
-          baz: 'Thắng Nguyễn'
-        };
+      // memory and redis providers needs to support it
+      if (process.env.DATABASE === 'gtm') {
+        it('should return document with utf-8 characters', function () {
+          var expected = {
+            baz: 'Thắng Nguyễn'
+          };
 
-        var foo = {
-          baz: 'Thắng Nguyễn'
-        };
+          var foo = {
+            baz: 'Thắng Nguyễn'
+          };
 
-        documentNode.$('foo').delete();
-        documentNode.$('foo').setDocument(foo);
+          documentNode.$('foo').delete();
+          documentNode.$('foo').setDocument(foo);
 
-        var actual = documentNode.$('foo').getDocument();
+          var actual = documentNode.$('foo').getDocument();
 
-        expect(actual).toEqual(expected);
-      });
+          expect(actual).toEqual(expected);
+        });
+      }
     });
 
     describe('#setDocument', function () {

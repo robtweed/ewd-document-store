@@ -27,7 +27,7 @@ function initGtmDb() {
   var openFn = db.open;
   var options = {
     mode: 'strict',
-    charset: 'm'
+    charset: 'utf-8'
   };
 
   db.open = function () {
