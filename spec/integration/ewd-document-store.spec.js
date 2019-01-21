@@ -590,7 +590,7 @@ describe('integration/ewd-document-store:', function () {
         expect(actual).toEqual(expected);
       });
 
-      it('should return document with utf-8 characters', function () {
+      xit('should return document with utf-8 characters', function () {
         var expected = {
           baz: 'Thắng Nguyễn'
         };
