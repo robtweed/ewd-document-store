@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 export gtm_version=V6.3-004
-export ydb_versionp=r1.22
-export ydb_version=r122
+export ydb_versionp=r1.24
+export ydb_version=r124
 export ydb_arch=x86_64
 
 export ydb_path="${ydb_versionp}_${ydb_arch}"
