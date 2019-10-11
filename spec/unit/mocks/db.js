@@ -12,6 +12,8 @@ module.exports = {
       get: jasmine.createSpy(),
       set: jasmine.createSpy(),
       version: jasmine.createSpy(),
+      lock: jasmine.createSpy(),
+      unlock: jasmine.createSpy(),
 
       /*jshint camelcase: false */
       global_directory: jasmine.createSpy(),

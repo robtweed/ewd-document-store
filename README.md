@@ -25,15 +25,34 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
 
 ## Integration tests
 
+### Memory
+
+ * `npm run test:integration` (default)
+ * `npm run test:integration:memory`
+
+### Redis
+
+ * `redis-server` (don't forget to start redis server)
+ * `npm run test:integration:redis`
+
+### InterSystem Caché
+
   * You must have [InterSystem Caché](http://www.intersystems.com/our-products/cache/cache-overview/) installed
   * You must have `cache.node` in npm global registy. Read [Installation](http://docs.intersystems.com/latest/csp/docbook/DocBook.UI.Page.cls?KEY=BXJS_intro#BXJS_intro_install) to get more details
   * Run `npm link cache.node` before running integration tests
   * You may need to run this as sudo because of permissions
+  * Run `npm run test:integration:cache`
+
+### Gtm or YottaDb
+  * `cd ./docker/gtm`
+  * `docker build -t <name> .`
+  * `docker run -it --rm  -v ~/path/to/ewd-document-store:/opt/qewd/mapped <name> /bin/bash`
+  * `cd mapped && npm run test:integration:gtm`
 
 
 ## License
 
- Copyright (c) 2013-17 M/Gateway Developments Ltd,                           
+ Copyright (c) 2013-19 M/Gateway Developments Ltd,                           
  Reigate, Surrey UK.                                                      
  All rights reserved.                                                     
                                                                            

@@ -3,7 +3,7 @@
 var lastChild = require('../../../lib/proto/lastChild');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/lastChild:', function () {
+describe('unit/proto/lastChild:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

@@ -3,7 +3,7 @@
 var hasChildren = require('../../../lib/proto/hasChildren');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/hasChildren:', function () {
+describe('unit/proto/hasChildren:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

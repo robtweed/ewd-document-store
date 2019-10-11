@@ -3,7 +3,7 @@
 var deleteMethod = require('../../../lib/proto/delete');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/delete:', function () {
+describe('unit/proto/delete:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

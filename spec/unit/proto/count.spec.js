@@ -3,7 +3,7 @@
 var count = require('../../../lib/proto/count');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/count:', function () {
+describe('unit/proto/count:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

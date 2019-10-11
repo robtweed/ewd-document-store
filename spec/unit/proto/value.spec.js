@@ -3,7 +3,7 @@
 var value = require('../../../lib/proto/value');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/value:', function () {
+describe('unit/proto/value:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;
@@ -55,6 +55,6 @@ describe(' - unit/proto/value:', function () {
 
     documentNode.value = 'bar';
 
-    expect(documentNode._set).toHaveBeenCalledWith('bar');
+    expect(documentNode._set).toHaveBeenCalledWithContext(documentNode, 'bar');
   });
 });

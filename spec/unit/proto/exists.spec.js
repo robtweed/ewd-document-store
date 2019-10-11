@@ -3,7 +3,7 @@
 var exists = require('../../../lib/proto/exists');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/exists:', function () {
+describe('unit/proto/exists:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

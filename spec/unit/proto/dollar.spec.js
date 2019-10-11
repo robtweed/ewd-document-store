@@ -3,7 +3,7 @@
 var $ = require('../../../lib/proto/dollar');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/dollar:', function () {
+describe('unit/proto/dollar:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;

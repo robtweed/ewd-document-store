@@ -2,23 +2,18 @@
 
 require('dotenv').config();
 
+var dbFactory = require('./dbFactory');
 var DocumentStore = require('../../');
-var Cache = require('cache').Cache;
 
-describe(' - integration/ewd-document-store: ', function () {
+describe('integration/ewd-document-store:', function () {
   var db;
   var documentStore;
 
   beforeAll(function () {
-    db = new Cache();
+    db = dbFactory();
     documentStore = new DocumentStore(db);
 
-    db.open({
-      path: process.env.CACHE_MGR_PATH || '/opt/cache/mgr',
-      username: process.env.CACHE_USERNAME || '_SYSTEM',
-      password: process.env.CACHE_PASSWORD || 'SYS',
-      namespace: process.env.CACHE_NAMESPACE || 'USER'
-    });
+    db.open();
   });
 
   afterAll(function () {
@@ -164,7 +159,7 @@ describe(' - integration/ewd-document-store: ', function () {
 
       foo.increment();
 
-      expect(foo.value).toBe('1');
+      expect(foo.value).toBe(1);
     });
 
     it('#countChildren', function () {
@@ -254,6 +249,27 @@ describe(' - integration/ewd-document-store: ', function () {
         expect(actual).toEqual(expected);
       });
 
+      it('should return all children in reverse direction #2', function () {
+        var expected = [
+          ['d', 'temp', 'foo', 'd'],
+          ['c', 'temp', 'foo', 'c'],
+          ['b', 'temp', 'foo', 'b'],
+          ['a', 'temp', 'foo', 'a'],
+          ['Douglas', 'temp', 'foo', 'Douglas'],
+          ['Davis', 'temp', 'foo', 'Davis'],
+          ['Davies', 'temp', 'foo', 'Davies'],
+          ['Briggs', 'temp', 'foo', 'Briggs'],
+          ['Barton', 'temp', 'foo', 'Barton']
+        ];
+
+        var actual = [];
+        documentNode.$('foo').forEachChild('reverse', function (nodeName, node) {
+          actual.push([nodeName, node.documentName].concat(node.path));
+        });
+
+        expect(actual).toEqual(expected);
+      });
+
       it('should return children using prefix', function () {
         var expected = [
           ['Barton', 'temp', 'foo', 'Barton'],
@@ -292,7 +308,7 @@ describe(' - integration/ewd-document-store: ', function () {
         expect(actual).toEqual(expected);
       });
 
-      it('should return from-to range (boundaries)', function () {
+      it('should return from-to range (boundaries, forwards)', function () {
         var expected = [
           ['Briggs', 'temp', 'foo', 'Briggs'],
           ['Davies', 'temp', 'foo', 'Davies'],
@@ -312,7 +328,7 @@ describe(' - integration/ewd-document-store: ', function () {
         expect(actual).toEqual(expected);
       });
 
-      it('should return from-* range', function () {
+      it('should return from-* range (forwards)', function () {
         var expected = [
           ['Davies', 'temp', 'foo', 'Davies'],
           ['Davis', 'temp', 'foo', 'Davis'],
@@ -335,6 +351,28 @@ describe(' - integration/ewd-document-store: ', function () {
         expect(actual).toEqual(expected);
       });
 
+      it('should return from-* range (reverse)', function () {
+        var expected = [
+          ['Douglas', 'temp', 'foo', 'Douglas'],
+          ['Davis', 'temp', 'foo', 'Davis'],
+          ['Davies', 'temp', 'foo', 'Davies'],
+          ['Briggs', 'temp', 'foo', 'Briggs'],
+          ['Barton', 'temp', 'foo', 'Barton']
+        ];
+
+        var actual = [];
+        documentNode.$('foo').forEachChild({
+          direction: 'reverse',
+          range: {
+            from: 'D'
+          }
+        }, function (nodeName, node) {
+          actual.push([nodeName, node.documentName].concat(node.path));
+        });
+
+        expect(actual).toEqual(expected);
+      });
+
       it('should return *-to range', function () {
         var expected = [
           ['Barton', 'temp', 'foo', 'Barton'],
@@ -346,6 +384,30 @@ describe(' - integration/ewd-document-store: ', function () {
 
         var actual = [];
         documentNode.$('foo').forEachChild({
+          range: {
+            to: 'D'
+          }
+        }, function (nodeName, node) {
+          actual.push([nodeName, node.documentName].concat(node.path));
+        });
+
+        expect(actual).toEqual(expected);
+      });
+
+      it('should return *-to range (reverse)', function () {
+        var expected = [
+          ['d', 'temp', 'foo', 'd'],
+          ['c', 'temp', 'foo', 'c'],
+          ['b', 'temp', 'foo', 'b'],
+          ['a', 'temp', 'foo', 'a'],
+          ['Douglas', 'temp', 'foo', 'Douglas'],
+          ['Davis', 'temp', 'foo', 'Davis'],
+          ['Davies', 'temp', 'foo', 'Davies']
+        ];
+
+        var actual = [];
+        documentNode.$('foo').forEachChild({
+          direction: 'reverse',
           range: {
             to: 'D'
           }
@@ -484,7 +546,7 @@ describe(' - integration/ewd-document-store: ', function () {
         expect(actual).toEqual(expected);
       });
 
-      it('should return document with arrays and offset', function () {
+      it('should return document with arrays and offset (array)', function () {
         var expected = {
           c: ['a', 's', 'd']
         };
@@ -503,6 +565,50 @@ describe(' - integration/ewd-document-store: ', function () {
 
         expect(actual).toEqual(expected);
       });
+
+      it('should return document with arrays and offset (object with keys)', function () {
+        var expected = {
+          c: ['a', 's', 'd']
+        };
+
+        var useArrays = true;
+        var offset = 1;
+
+        var foo = {
+          c: {
+            '1': 'a',
+            '2': 's',
+            '3': 'd',
+          }
+        };
+
+        documentNode.$('foo').delete();
+        documentNode.$('foo').setDocument(foo, offset);
+
+        var actual = documentNode.$('foo').getDocument(useArrays, offset);
+
+        expect(actual).toEqual(expected);
+      });
+
+      // memory and redis providers needs to support it
+      if (process.env.DATABASE === 'gtm') {
+        it('should return document with utf-8 characters', function () {
+          var expected = {
+            baz: 'Thắng Nguyễn'
+          };
+
+          var foo = {
+            baz: 'Thắng Nguyễn'
+          };
+
+          documentNode.$('foo').delete();
+          documentNode.$('foo').setDocument(foo);
+
+          var actual = documentNode.$('foo').getDocument();
+
+          expect(actual).toEqual(expected);
+        });
+      }
     });
 
     describe('#setDocument', function () {
@@ -614,7 +720,6 @@ describe(' - integration/ewd-document-store: ', function () {
       });
 
       var actual = documentStore.list();
-
       expect(actual).toEqual(expected);
 
       ['foo', 'bar', 'baz'].forEach(function (name) {

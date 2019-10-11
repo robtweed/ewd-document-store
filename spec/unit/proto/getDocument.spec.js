@@ -3,7 +3,7 @@
 var getDocument = require('../../../lib/proto/getDocument');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/setDocument:', function () {
+describe('unit/proto/getDocument:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;
@@ -38,12 +38,28 @@ describe(' - unit/proto/setDocument:', function () {
     db.version.and.returnValue('Node.js Adaptor for Cache: Version: 1.1.112 (CM); Cache Version: 2016.3 build 168');
     db.data.and.returnValue(
       {
+        ok: 1,
         defined: 1
       }
     );
   });
 
-  it('should return empty object', function () {
+  it('should return empty object when non ok', function () {
+    var expected = {};
+
+    db.data.and.returnValue({
+      ok: 0
+    });
+
+    var actual = documentNode.getDocument();
+
+    expect(actual).toEqual(expected);
+    expect(db.data).toHaveBeenCalledWith({
+      global: 'rob'
+    });
+  });
+
+  it('should return empty object when non defined', function () {
     var expected = {};
 
     db.data.and.returnValue({
@@ -105,7 +121,6 @@ describe(' - unit/proto/setDocument:', function () {
         })
       );
       /*jshint camelcase: true */
-
     });
 
     it('should process node contains bool data', function () {
@@ -200,6 +215,7 @@ describe(' - unit/proto/setDocument:', function () {
 
       db.data.and.returnValues(
         {
+          ok: 1,
           defined: 1
         },
         {
@@ -273,6 +289,7 @@ describe(' - unit/proto/setDocument:', function () {
 
       db.data.and.returnValues(
         {
+          ok: 1,
           defined: 1
         },
         {
@@ -328,6 +345,7 @@ describe(' - unit/proto/setDocument:', function () {
 
       db.data.and.returnValues(
         {
+          ok: 1,
           defined: 1
         },
         {
@@ -384,6 +402,7 @@ describe(' - unit/proto/setDocument:', function () {
 
       db.data.and.returnValues(
         {
+          ok: 1,
           defined: 1
         },
         {
@@ -500,6 +519,7 @@ describe(' - unit/proto/setDocument:', function () {
 
       db.data.and.returnValues(
         {
+          ok: 1,
           defined: 1
         },
         {
@@ -606,6 +626,7 @@ describe(' - unit/proto/setDocument:', function () {
 
       db.data.and.returnValues(
         {
+          ok: 1,
           defined: 1
         },
         {
@@ -709,6 +730,7 @@ describe(' - unit/proto/setDocument:', function () {
 
       db.data.and.returnValues(
         {
+          ok: 1,
           defined: 1
         },
         {
@@ -758,5 +780,4 @@ describe(' - unit/proto/setDocument:', function () {
       expect(actual).toEqual(expected);
     });
   });
-
 });

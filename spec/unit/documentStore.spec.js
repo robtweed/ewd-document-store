@@ -4,7 +4,7 @@ var events = require('events');
 var rewire = require('rewire');
 var DocumentStore = rewire('../../lib/documentStore');
 
-describe(' - unit/documentStore:', function () {
+describe('unit/documentStore:', function () {
   var revertBuild;
 
   beforeEach(function () {
@@ -132,6 +132,8 @@ describe(' - unit/documentStore:', function () {
         'getDocument',
         'setDocument',
         'forEachLeafNode',
+        'lock',
+        'unlock',
         '_set'
       ].forEach(function (method) {
         describe('#' + method, function () {
