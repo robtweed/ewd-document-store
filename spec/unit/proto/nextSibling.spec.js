@@ -46,11 +46,17 @@ describe(' - unit/proto/nextSibling:', function () {
       subscripts: ['bar']
     });
 
+    console.log(11111);
     var actual = documentNode.nextSibling;
+    console.log('actual');
+    console.log(actual);
 
     expect(actual instanceof DocumentNode).toBeTruthy();
+    console.log(22222);
     expect(actual.documentName).toBe('rob');
+    console.log(3333);
     expect(actual.path).toEqual(['bar']);
+    console.log(4444);
 
     expect(documentStore.db.next).toHaveBeenCalledWith({
       global: 'rob',
