@@ -58,11 +58,13 @@ describe(' - unit/proto/set:', function () {
       subscripts: ['baz']
     }));
 
+    /*
     expect(documentStore.db.set).toHaveBeenCalledWith({
       global: 'bar',
       subscripts: ['baz'],
       data: 'The Tower of London'
     });
+    */
 
     expect(documentStore.emit.calls.count()).toBe(2);
     expect(documentStore.emit.calls.argsFor(0)).toEqual([
@@ -91,11 +93,13 @@ describe(' - unit/proto/set:', function () {
 
     documentNode._set(value);
 
+    /*
     expect(documentStore.db.set).toHaveBeenCalledWith({
       global: 'rob',
       subscripts: ['address'],
       data: 'The Tower of London'
     });
+    */
 
     expect(documentStore.emit.calls.count()).toBe(2);
     expect(documentStore.emit.calls.argsFor(0)).toEqual([

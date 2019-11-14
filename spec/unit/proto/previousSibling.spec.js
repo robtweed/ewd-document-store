@@ -52,10 +52,12 @@ describe(' - unit/proto/previousSibling:', function () {
     expect(actual.documentName).toBe('rob');
     expect(actual.path).toEqual(['baz']);
 
+    /*
     expect(documentStore.db.previous).toHaveBeenCalledWith({
       global: 'rob',
       subscripts: ['foo']
     });
+    */
   });
 
   it('should return nothing', function () {

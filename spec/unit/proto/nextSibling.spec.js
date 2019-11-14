@@ -45,11 +45,7 @@ describe(' - unit/proto/nextSibling:', function () {
       result: 'bar',
       subscripts: ['bar']
     });
-
-    console.log(11111);
     var actual = documentNode.nextSibling;
-    console.log('actual');
-    console.log(actual);
 
     expect(actual instanceof DocumentNode).toBeTruthy();
     expect(actual.documentName).toBe('rob');
