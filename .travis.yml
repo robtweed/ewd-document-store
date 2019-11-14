@@ -3,12 +3,6 @@ node_js:
   - '8'
   - '7'
   - '6'
-  - '5'
-  - '4'
-  - 'iojs'
-  - '0.12'
-  - '0.11'
-  - '0.10'
 script:
   - npm run test:unit
 after_success:

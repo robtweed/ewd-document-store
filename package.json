@@ -13,7 +13,7 @@
     "url": "https://github.com/robtweed/ewd-document-store/issues"
   },
   "engines": {
-    "node": ">= 0.10",
+    "node": ">= 6.0",
     "npm": ">= 2.15"
   },
   "repository": {
