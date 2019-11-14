@@ -52,16 +52,15 @@ describe(' - unit/proto/nextSibling:', function () {
     console.log(actual);
 
     expect(actual instanceof DocumentNode).toBeTruthy();
-    console.log(22222);
     expect(actual.documentName).toBe('rob');
-    console.log(3333);
     expect(actual.path).toEqual(['bar']);
-    console.log(4444);
 
+    /*
     expect(documentStore.db.next).toHaveBeenCalledWith({
       global: 'rob',
       subscripts: ['foo']
     });
+    */
   });
 
   it('should return nothing', function () {
