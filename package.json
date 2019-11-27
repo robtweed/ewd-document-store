@@ -1,6 +1,6 @@
 {
   "name": "ewd-document-store",
-  "version": "2.1.14",
+  "version": "2.1.15",
   "config": {
     "date": "27 November 2019"
   },
@@ -46,7 +46,7 @@
   "dependencies": {
     "sax": "",
     "xpath": "",
-    "@types/node-sql-parser": ""
+    "node-sql-parser": ""
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
