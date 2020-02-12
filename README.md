@@ -12,6 +12,28 @@ Twitter: [@rtweed](https://twitter.com/rtweed)
 Google Group for discussions, support, advice etc: [http://groups.google.co.uk/group/enterprise-web-developer-community](http://groups.google.co.uk/group/enterprise-web-developer-community)
 
 
+## About ewd-document-store
+
+The *ewd-document-store* module abstracts Global Storage databases as persistent JSON and/or on-disk JavaScript Objects.  It is built upon the lower-level Global Storage access APIs provided by a number of other modules:
+
+- for YottaDB:
+  - [mg-dbx](https://github.com/chrisemunt/mg-dbx)
+  - [NodeM](https://github.com/dlwicksell/nodem)
+- For InterSystems Cache and IRIS:
+  - [mg-dbx](https://github.com/chrisemunt/mg-dbx)
+  - the *cache.node* and *iris.node* modules that are provided by InterSystems
+
+*ewd-document-store* is the basis of [QEWD-JSdb](https://github.com/robtweed/qewd-jsdb), and provides APIs for a range of database models, including:
+
+- persistent JSON / on-disk JavaScript Objects
+- Redis-like Lists
+- Redis-like Key/Object store
+- Relational Database with SQL
+- Persistent XML/HTML DOM with XPath
+
+For more information, see the [QEWD-JSdb documentation](https://github.com/robtweed/qewd-jsdb).
+
+
 ## Installation
 
     npm install ewd-document-store
@@ -19,8 +41,12 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
 
 ## Using ewd-document-store
 
-  - For full details of ewd-document-store see: [http://gradvs1.mgateway.com/download/ewd-document-store.pdf](http://gradvs1.mgateway.com/download/ewd-document-store.pdf)
-  - For a complete, working examples, refer to [examples](https://github.com/robtweed/ewd-document-store-examples) that uses `ewd-document-store`
+Most users of *ewd-document-store* will do so through the [*QEWD* framework](https://github.com/robtweed/qewd)
+where it is a tightly-integrated piece of QEWD's core functionality. 
+
+It can also be used independently.  If you do so, you will also need to ensure that you are using one of the lower-level Global Storage access modules described above.
+
+It is recommended that you consult the [QEWD-JSdb documentation](https://github.com/robtweed/qewd-jsdb) for more information.
 
 
 ## Integration tests
@@ -33,7 +59,7 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
 
 ## License
 
- Copyright (c) 2013-17 M/Gateway Developments Ltd,                           
+ Copyright (c) 2013-20 M/Gateway Developments Ltd,                           
  Reigate, Surrey UK.                                                      
  All rights reserved.                                                     
                                                                            
