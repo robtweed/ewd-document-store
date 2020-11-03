@@ -1,0 +1,10 @@
+s ^Person("by_id",2,"city")="Tweed"
+s ^Person("by_id",2,"gender")="m"
+s ^Person("by_id",2,"name")="Rob"
+s ^Person("by_id",3,"city")="Lucio_Hettinger@annie.ca"
+s ^Person("by_id",3,"gender")="f"
+s ^Person("by_id",3,"name")="Chelsey Dietrich"
+s ^Person("by_id",4,"city")="Redhill"
+s ^Person("by_id",4,"gender")="m"
+s ^Person("by_id",4,"name")="Fred"
+s ^Person("id_counter")=4

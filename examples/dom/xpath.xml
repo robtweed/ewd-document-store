@@ -1,0 +1,29 @@
+<doc>
+  <foo location="Drumcondra">
+    <bar name="Cat and Cage">pub 1</bar>
+    <bar name="Fagan's" owner="John" tied="true">pub 2</bar>
+    <offlicense name="oddbins"/>
+    <bar name="Gravedigger's">pub 3</bar>
+    <bar name="Ivy House">pub 4</bar>
+  </foo>
+  <foo location="Town">
+    <bar name="Peter's Pub">pub 5</bar>
+    <bar name="Grogan's">pub 6</bar>
+    <bar name="Hogans's">club 1</bar>
+    <bar name="Brogan's" tied="false" owner="James">pub 8</bar>
+    <bar closed="yes">pub 9</bar>
+    <offlicense name="unwins"/>
+  </foo>
+  <aaa>
+    <bbb>
+      <bar name="Robin Hood">pub 10
+        <beer name="guinness"/>
+        <beer name="tetleys"/>
+      </bar>
+      <bar>As yet un-named pub</bar>
+    </bbb>
+    <foo>
+      <ccc/>
+    </foo>
+  </aaa>
+</doc>
